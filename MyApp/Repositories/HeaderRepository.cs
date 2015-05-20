@@ -15,10 +15,12 @@ namespace MyApp.Repositories
 	    }
 
         // 検索
-        public ICollection<Header> Search(Header condition)
+        public ICollection<Header> Search(Header condition )
         {
             var query = from h in _context.Headers 
                         select h;
+
+            condition = condition ?? new Header();
 
             if (condition.Id != 0)
             {
@@ -34,8 +36,10 @@ namespace MyApp.Repositories
         }
 
         // IDと一致するレコードを取得
-        public Header Find(int id)
+        public Header Find(int? id)
         {
+            if (id == null) throw new KeyNotFoundException();
+
             return _context.Headers.Find(id);
         }
 

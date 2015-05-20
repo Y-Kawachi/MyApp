@@ -27,7 +27,7 @@ namespace MyApp.Services
         }
 
         // IDと一致するレコードを取得
-        public Header Find(int id)
+        public Header Find(int? id)
         {
             return _repository.Find(id);
         }
@@ -49,5 +49,6 @@ namespace MyApp.Services
         {
             _repository.SaveChanges();
         }
+
     }
 }

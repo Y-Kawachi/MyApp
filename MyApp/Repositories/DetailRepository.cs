@@ -17,8 +17,10 @@ namespace MyApp.Repositories
         }
 
         // IDと一致するレコードを取得
-        public Detail Find(int id)
+        public Detail Find(int? id)
         {
+            if (id == null) throw new KeyNotFoundException();
+
             return null;
         }
 

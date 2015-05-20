@@ -8,7 +8,7 @@ namespace MyApp.Repositories
         ICollection<T> Search(T t);
 
         // IDと一致するレコードを取得
-        T Find(int id);
+        T Find(int? id);
 
         // データ追加
         void Add(T t);
