@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MyApp.Models
+namespace MyApp.Models.Entity
 {
-    [Table("main", Schema = "public")]
+    [Table("header", Schema = "public")]
     public class Header
     {
         [Key]
@@ -22,15 +23,16 @@ namespace MyApp.Models
         [DisplayName("何らかの区分")]
         [Column("appdiv")]
         [MaxLength(2)]
-        public string Appdiv { get; set; }
+        public string AppDiv { get; set; }
 
         [DisplayName("作成日時")]
         [Column("createdat")]
-        public DateTime Createdat { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
         [DisplayName("更新日時")]
         [Column("updatedat")]
-        public DateTime Updatedat { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
+        public virtual ICollection<Detail> Details { get; set; }
     }
 }

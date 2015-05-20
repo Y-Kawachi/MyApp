@@ -3,40 +3,41 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MyApp.Models
+namespace MyApp.Models.Entity
 {
     [Table("detail", Schema = "public")]
-    public class Details
+    public class Detail
     {
-        [Key]
+        [Key, ForeignKey("Header")]
         [DisplayName("ヘッダーID")]
-        [Column("id", Order=1)]
+        [Column("headerid", Order=1)]
+        [Required]
+        public int HeaderId { get; set; }
+
+        [Key]
+        [DisplayName("明細ID")]
+        [Column("id", Order = 2)]
         [Required]
         public int Id { get; set; }
 
-        [Key]
-        [DisplayName("ID")]
-        [Column("id", Order = 1)]
-        [Required]
-        [MaxLength(256)]
-        public string Title { get; set; }
-
         [DisplayName("詳細")]
         [Column("description")]
-        [MaxLength(2)]
+        [MaxLength(50)]
         public string Description { get; set; }
 
         [DisplayName("備考")]
         [Column("caution")]
-        public DateTime Caution { get; set; }
+        [MaxLength(50)]
+        public string Caution { get; set; }
 
         [DisplayName("作成日時")]
         [Column("createdat")]
-        public DateTime Createdat { get; set; }
+        public DateTime? Createdat { get; set; }
 
         [DisplayName("更新日時")]
         [Column("updatedat")]
-        public DateTime Updatedat { get; set; }
+        public DateTime? Updatedat { get; set; }
 
+        public virtual Header Header { get; set; }
     }
 }
