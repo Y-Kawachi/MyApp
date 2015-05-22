@@ -1,6 +1,8 @@
 ﻿using MyApp.Models;
 using MyApp.Models.Entity;
+using MyApp.Models.View;
 using MyApp.Services;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -35,7 +37,14 @@ namespace MyApp.Controllers
         // GET: Headers/Create
         public ActionResult Create()
         {
-            return View();
+            EditHeaderView viewModel = new EditHeaderView()
+            {
+                Header = new Header()
+                {
+                    Details = new List<Detail>() { new Detail() }
+                }
+            };
+            return View(viewModel);
         }
 
         // POST: Headers/Create
@@ -43,16 +52,16 @@ namespace MyApp.Controllers
         // 詳細については、http://go.microsoft.com/fwlink/?LinkId=317598 を参照してください。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,AppDiv,CreatedAt,UpdatedAt")] Header header)
+        public ActionResult Create(EditHeaderView formValues)
         {
             if (ModelState.IsValid)
             {
-                _service.Add(header);
+                _service.Add(formValues.Header);
                 _service.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(header);
+            return View(formValues);
         }
 
         // GET: Headers/Edit/5

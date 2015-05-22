@@ -44,18 +44,21 @@ namespace MyApp.Repositories
         }
 
         // データ追加
-        public void Add(Header Header)
+        public void Add(Header header)
         {
+            _context.Headers.Add(header);
         }
 
         // データ削除
-        public void Delete(Header Header)
-        { 
+        public void Delete(Header header)
+        {
+            _context.Headers.Remove(header);
         }
 
         // データ保存
         public void SaveChanges()
         {
+            _context.SaveChanges();
         }
 
     }

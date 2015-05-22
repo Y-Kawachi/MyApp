@@ -1,0 +1,65 @@
+﻿@model MyApp.Models.View.EditHeaderView
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Header</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Header.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Header.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Header.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Header.AppDiv, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Header.AppDiv, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Header.AppDiv, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @for (int i = 0; i < Model.Header.Details.Count; i++)
+        {
+            <div class="form-group">
+                @Html.LabelFor(sub => Model.Header.Details.ElementAt(i).Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Editor(string.Format("Header.Details[{0}].Description", i), Model.Header.Details.ElementAt(i).Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(sub => Model.Header.Details.ElementAt(i).Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(sub => Model.Header.Details.ElementAt(i).Caution, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Editor(string.Format("Header.Details[{0}].Caution", i), Model.Header.Details.ElementAt(i).Caution, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(sub => Model.Header.Details.ElementAt(i).Caution, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

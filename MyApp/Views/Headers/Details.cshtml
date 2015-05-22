@@ -1,0 +1,57 @@
+﻿@model MyApp.Models.Entity.Header
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+<div>
+    <h4>Header</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AppDiv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AppDiv)
+        </dd>
+
+        <dt>詳細</dt>
+        <dd>
+                @for (int i = 0; i < Model.Details.Count; i++)
+                {
+                    @i
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => Model.Details.ElementAt(i).Description)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => Model.Details.ElementAt(i).Description)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => Model.Details.ElementAt(i).Caution)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => Model.Details.ElementAt(i).Caution)
+                        </dd>
+                    </dl>
+                }
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
